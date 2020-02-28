@@ -7,7 +7,25 @@
 
 		<div class="col col-md-2 mts"><a class="btn btn-danger" href="/reset-content">Reset Content</a></div>
 		<div class="col col-md-8 mtm">
-			<h4>Application Service Account</h4>
+			<h4>Create a new program</h4>
+			<form action="/create-new-program-folder" method="post">
+				<label for="region">REGION:</label>
+				<select name="region" id="region">
+					<option value="asia">Asia</option>
+					<option value="africa">Africa</option>
+					<option value="europe">Europe</option>
+					<option value="northAmerica">North America</option>
+					<option value="southAmerica">South America</option>
+				</select>
+				<br>
+				<label for="country">COUNTRY:</label>
+				<input id="country" name="country" type="text">
+				<br>
+				<label for="program">PROGRAM NAME:</label>
+				<input id="program" name="program" type="text">
+				<br>
+				<button type="submit" class="btn btn-primary">Create new program</button>
+			</form>
 			<div style="border-style: dashed; border-color: #F1F1F1; padding: 10px">
 				<form class="form-inline" action="/create-collaboration" method="post">
 					<div class="form-group">
@@ -34,7 +52,7 @@
 	</div>
 	<div class="row mtm mbl">
 		<div class="col col-md-5">
-			<h4 id="User A" class="editable">User A</h4>
+			<h4 id="User A" class="editable">Regional Director</h4>
 			<!-- Box Content Explorer -->
 			<div class="tab-pane show active mts" style="border-style: dotted; border-color: #9EB7DC; padding: 10px" role="tabpanel" id="explorer">
 				<div style="height:400px" class="explorer-a"></div>
@@ -43,7 +61,7 @@
 		<div class="col col-md-2"></div>
 
 		<div class="col col-md-5">
-			<h4 id="User B" class="editable">User B</h4>
+			<h4 id="User B" class="editable">Country Director</h4>
 			<!-- Box Content Explorer -->
 			<div class="tab-pane show active mts" style="border-style: dotted; border-color: #9EB7DC; padding: 10px" role="tabpanel" id="explorer">
 				<div style="height:400px" class="explorer-b"></div>

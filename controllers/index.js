@@ -8,8 +8,8 @@ const BoxSdk = require('../service/box/boxSdk');
 const BoxConfig = require('config').boxAppSettings;
 
 // REPLACE WITH YOUR OWN UNIQUE IDS
-const A_ID = '3857800618'
-const B_ID = '3857836430'
+const A_ID = '11851571296'
+const B_ID = '11851489646'
 
 /**
  * base route
@@ -40,6 +40,34 @@ router.get('/', async function(req, res) {
     }
   });
 });
+
+router.post("/create-new-program-folder", async function(req, res) {
+  console.log(req.body);
+  let client = BoxSdk.getAppAuthClient('enterprise', BoxConfig.enterpriseID);
+
+  const FOLDERIDS = {
+    europe: "105159613732",
+    asia: "105159069024",
+    northAmerica: "105159485653",
+    southAmerica: "105158806832",
+    africa: "105158781613",
+    middleEast: "105158064907"
+  }
+
+  const countryFolder = await client.folders.create(FOLDERIDS[req.body.region], req.body.country);
+  client.folders.create(countryFolder.id, "Finance");
+  client.folders.create(countryFolder.id, "Operations");
+
+  const programsFolder = await client.folders.create(countryFolder.id, "Programs");
+  const programFolder = await client.folders.create(programsFolder.id, req.body.program);
+  client.folders.create(programFolder.id, "Identification and Design");
+  client.folders.create(programFolder.id, "Budget");
+  client.folders.create(programFolder.id, "Implementation");
+  client.folders.create(programFolder.id, "Monitoring and Evaluation");
+
+  res.redirect('/')
+
+})
 
 /**
  * create folder collaboration
