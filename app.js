@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars')
 const hbs = require('hbs')
 require('express-async-errors');
 
-const PORT = 3000 || process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 // Create a new Express application.
 var app = express();
