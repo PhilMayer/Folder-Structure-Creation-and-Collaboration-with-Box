@@ -6,21 +6,21 @@
 	<div class="row">
 
 		<div class="col col-md-2 mts"><a class="btn btn-danger" href="/reset-content">Reset Content</a></div>
-		<div class="col col-md-8 mtm">
+		<div class="col col-md-9 mtm">
 			<h4>Create a new program</h4>
 			<form action="/create-new-program-folder" method="post">
 				<label for="region">REGION:</label>
-				<select name="region" id="region">
+				<select name="region" id="region" class="mr-2">
 					<option value="asia">Asia</option>
 					<option value="africa">Africa</option>
 					<option value="europe">Europe</option>
 					<option value="northAmerica">North America</option>
 					<option value="southAmerica">South America</option>
 				</select>
-				<br>
+			
 				<label for="country">COUNTRY:</label>
-				<input id="country" name="country" type="text">
-				<br>
+				<input id="country" name="country" type="text" class="mr-2">
+			
 				<label for="program">PROGRAM NAME:</label>
 				<input id="program" name="program" type="text">
 				<br>
@@ -52,7 +52,7 @@
 	</div>
 	<div class="row mtm mbl">
 		<div class="col col-md-5">
-			<h4 id="User A" class="editable">Regional Director</h4>
+			<h4 id="User A" class="editable">Country Director</h4>
 			<!-- Box Content Explorer -->
 			<div class="tab-pane show active mts" style="border-style: dotted; border-color: #9EB7DC; padding: 10px" role="tabpanel" id="explorer">
 				<div style="height:400px" class="explorer-a"></div>
@@ -61,20 +61,43 @@
 		<div class="col col-md-2"></div>
 
 		<div class="col col-md-5">
-			<h4 id="User B" class="editable">Country Director</h4>
+			<h4 id="User B" class="editable">Programs Director</h4>
 			<!-- Box Content Explorer -->
 			<div class="tab-pane show active mts" style="border-style: dotted; border-color: #9EB7DC; padding: 10px" role="tabpanel" id="explorer">
 				<div style="height:400px" class="explorer-b"></div>
 			</div>
 		</div>
 
+
 	</div>
+		<div class="row mtm mbl">
+			<div class="col col-md-5">
+				<h4 id="User B" class="editable">Program Manager</h4>
+				<!-- Box Content Explorer -->
+				<div class="tab-pane show active mts" style="border-style: dotted; border-color: #9EB7DC; padding: 10px"
+					role="tabpanel" id="explorer">
+					<div style="height:400px" class="explorer-c"></div>
+				</div>
+			</div>
+
+			<div class="col col-md-2"></div>
+
+			<div class="col col-md-5">
+				<h4 id="User B" class="editable">Budget Director</h4>
+				<!-- Box Content Explorer -->
+				<div class="tab-pane show active mts" style="border-style: dotted; border-color: #9EB7DC; padding: 10px"
+					role="tabpanel" id="explorer">
+					<div style="height:400px" class="explorer-d"></div>
+				</div>
+		</div>
 </div>
 
 <script>
   const folderId = '0';
   const explorerA = new Box.ContentExplorer();
 	const explorerB = new Box.ContentExplorer();
+	const explorerC = new Box.ContentExplorer();
+	const explorerD = new Box.ContentExplorer();
 	const explorerSA = new Box.ContentExplorer();
 
 
@@ -85,6 +108,16 @@
 
 	explorerB.show(folderId, '{{tokenB}}', {
     container: '.explorer-b',
+		logoUrl: ""
+  });
+
+	explorerC.show(folderId, '{{tokenC}}', {
+    container: '.explorer-c',
+		logoUrl: ""
+  });
+
+	explorerD.show(folderId, '{{tokenD}}', {
+    container: '.explorer-d',
 		logoUrl: ""
   });
 

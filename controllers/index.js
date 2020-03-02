@@ -10,32 +10,48 @@ const BoxConfig = require('config').boxAppSettings;
 // REPLACE WITH YOUR OWN UNIQUE IDS
 const A_ID = '11851571296'
 const B_ID = '11851489646'
+const C_ID = '11911453868'
+const D_ID = '11912173756'
 
 /**
  * base route
  */
 router.get('/', async function(req, res) {
-  let clientA = BoxSdk.getAppAuthClient('user', A_ID);
-  let clientB = BoxSdk.getAppAuthClient('user', B_ID);
+  // let clientA = BoxSdk.getAppAuthClient('user', A_ID);
+  // let clientB = BoxSdk.getAppAuthClient('user', B_ID);
+  // let clientC = BoxSdk.getAppAuthClient('user', C_ID);
+  // let clientD = BoxSdk.getAppAuthClient('user', D_ID);
 
   let tokens = await Promise.all([
     BoxSdk.getAppUserTokens(A_ID),
     BoxSdk.getAppUserTokens(B_ID),
+    BoxSdk.getAppUserTokens(C_ID),
+    BoxSdk.getAppUserTokens(D_ID),
     BoxSdk.getEnterpriseAppAuthTokens(BoxConfig.enterpriseID)]
   )
 
   res.render('pages/home', {
     tokenA: tokens[0].accessToken,
     tokenB: tokens[1].accessToken,
-    saToken: tokens[2].accessToken,
+    tokenC: tokens[2].accessToken,
+    tokenD: tokens[3].accessToken,
+    saToken: tokens[4].accessToken,
     users: {
       A: {
         id: A_ID,
-        name: "User A"
+        name: "Country Director"
       },
       B: {
         id: B_ID,
-        name: "User B"
+        name: "Programs Director"
+      },
+      C: {
+        id: C_ID,
+        name: "Program Manager"
+      },
+      D: {
+        id: D_ID,
+        name: "Budget Director"
       }
     }
   });
@@ -93,11 +109,11 @@ router.post("/create-collaboration", async function(req, res) {
 router.get('/create-users', async function(req, res) {
   let client = BoxSdk.getAppAuthClient('enterprise', BoxConfig.enterpriseID);
 
-  let userA = await client.enterprise.addAppUser('User A', null)
-  console.log(userA);
+  let userC = await client.enterprise.addAppUser('User C', null)
+  console.log(userC);
 
-  let userB = await client.enterprise.addAppUser('User B', null)
-  console.log(userB);
+  let userD = await client.enterprise.addAppUser('User D', null)
+  console.log(userD);
 });
 
 
@@ -108,11 +124,15 @@ router.get('/reset-content', async function(req, res) {
   let saClient = BoxSdk.getAppAuthClient('enterprise', BoxConfig.enterpriseID);
   let clientA = BoxSdk.getAppAuthClient('user', A_ID);
   let clientB = BoxSdk.getAppAuthClient('user', B_ID);
+  let clientC = BoxSdk.getAppAuthClient('user', C_ID);
+  let clientD = BoxSdk.getAppAuthClient('user', D_ID);
 
   await Promise.all([
     deleteAllContent(saClient),
     deleteAllContent(clientA),
-    deleteAllContent(clientB)]
+    deleteAllContent(clientB),
+    deleteAllContent(clientC),
+    deleteAllContent(clientD)]
   );
 
   res.redirect('/')
