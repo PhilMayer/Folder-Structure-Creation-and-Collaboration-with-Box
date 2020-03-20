@@ -62,12 +62,12 @@ router.post("/create-new-program-folder", async function(req, res) {
   let client = BoxSdk.getAppAuthClient('enterprise', BoxConfig.enterpriseID);
 
   const FOLDERIDS = {
-    europe: "105159613732",
-    asia: "105159069024",
-    northAmerica: "105159485653",
-    southAmerica: "105158806832",
-    africa: "105158781613",
-    middleEast: "105158064907"
+    europe: "107623144518",
+    asia: "107622205677",
+    northAmerica: "107622059623",
+    southAmerica: "107622887999",
+    africa: "107623020591",
+    middleEast: "107623112810"
   }
 
   const countryFolder = await client.folders.create(FOLDERIDS[req.body.region], req.body.country);
@@ -96,6 +96,20 @@ router.post("/create-collaboration", async function(req, res) {
   await client.collaborations.createWithUserID(
     req.body.userId,
     req.body.folderId,
+    client.collaborationRoles.EDITOR,
+    options);
+
+  res.redirect('/')
+})
+
+router.get("/add-devs-account", async function (req, res) {
+  let client = BoxSdk.getAppAuthClient('enterprise', BoxConfig.enterpriseID);
+
+  const options = { can_view_path: true };
+
+  await client.collaborations.createWithUserEmail(
+    "adev+sedemo@boxdemo.com",
+    "105448210706",
     client.collaborationRoles.EDITOR,
     options);
 
